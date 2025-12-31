@@ -107,3 +107,26 @@ h1 {
   text-align: center;
 }
 
+.music-box {
+  margin-top: 20px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.music-label {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.music-player {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.music-player iframe {
+  border-radius: 12px;
+}
+

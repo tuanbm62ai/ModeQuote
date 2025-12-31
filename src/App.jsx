@@ -9,6 +9,46 @@ const moods = [
   { id: 'love', label: '❤️ Yêu đời', emoji: '❤️' },
 ]
 
+// Video ID YouTube - lấy từ URL: youtube.com/watch?v=VIDEO_ID
+// Thay thế các ID dưới đây bằng video ID thực tế từ YouTube
+const music = {
+  happy: [
+    'jfKfPfyJRdk', // Lofi chill - tạm thời dùng để test
+    '5qap5aO4i9A', // Lofi hip hop radio
+    'DWcJFNfaw9c', // Chill music
+    '7NOSDKb0HlU', // Relaxing music
+    'lP26UCnoH9s', // Peaceful music
+  ],
+  sad: [
+    'jfKfPfyJRdk', // Tạm thời dùng để test
+    '5qap5aO4i9A', // Thay bằng bài hát buồn tiếng Việt
+    'DWcJFNfaw9c', // Thay bằng bài hát buồn tiếng Việt
+    '7NOSDKb0HlU', // Thay bằng bài hát buồn tiếng Việt
+    'lP26UCnoH9s', // Thay bằng bài hát buồn tiếng Việt
+  ],
+  stress: [
+    'jfKfPfyJRdk', // Lofi chill - thư giãn
+    '5qap5aO4i9A', // Lofi hip hop radio
+    'DWcJFNfaw9c', // Chill music
+    '7NOSDKb0HlU', // Relaxing music
+    'lP26UCnoH9s', // Peaceful music
+  ],
+  bored: [
+    'jfKfPfyJRdk', // Lofi chill
+    '5qap5aO4i9A', // Lofi hip hop radio
+    'DWcJFNfaw9c', // Chill music
+    '7NOSDKb0HlU', // Relaxing music
+    'lP26UCnoH9s', // Peaceful music
+  ],
+  love: [
+    'jfKfPfyJRdk', // Tạm thời dùng để test
+    '5qap5aO4i9A', // Thay bằng bài hát tình yêu tiếng Việt
+    'DWcJFNfaw9c', // Thay bằng bài hát tình yêu tiếng Việt
+    '7NOSDKb0HlU', // Thay bằng bài hát tình yêu tiếng Việt
+    'lP26UCnoH9s', // Thay bằng bài hát tình yêu tiếng Việt
+  ],
+}
+
 const quotes = {
   happy: [
     'Hạnh phúc không phải là đích đến, mà là cách bạn đi.',
@@ -125,12 +165,17 @@ const quotes = {
 function App() {
   const [selectedMood, setSelectedMood] = useState(null)
   const [currentQuote, setCurrentQuote] = useState('')
+  const [currentMusic, setCurrentMusic] = useState(null)
 
   const handleMoodClick = (moodId) => {
     setSelectedMood(moodId)
     const moodQuotes = quotes[moodId] || []
     const randomQuote = moodQuotes[Math.floor(Math.random() * moodQuotes.length)]
     setCurrentQuote(randomQuote)
+    
+    const moodMusic = music[moodId] || []
+    const randomMusic = moodMusic[Math.floor(Math.random() * moodMusic.length)]
+    setCurrentMusic(randomMusic)
   }
 
   return (
@@ -152,9 +197,27 @@ function App() {
         </div>
 
         {currentQuote && (
-          <div className="quote-box">
-            <p className="quote">{currentQuote}</p>
-          </div>
+          <>
+            <div className="quote-box">
+              <p className="quote">{currentQuote}</p>
+            </div>
+            {currentMusic && currentMusic !== 'YOUR_VIDEO_ID_1' && !currentMusic.startsWith('YOUR_VIDEO_ID') && (
+              <div className="music-box">
+                <p className="music-label">🎵 Nhạc cho tâm trạng này</p>
+                <div className="music-player">
+                  <iframe
+                    width="100%"
+                    height="152"
+                    src={`https://www.youtube.com/embed/${currentMusic}?autoplay=1&mute=0&rel=0`}
+                    title="YouTube music player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
